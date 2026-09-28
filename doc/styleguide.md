@@ -22,6 +22,9 @@ Write for someone who knows a great deal — up to but not including this projec
 
 If specific knowledge is required, mention it at the start of the page.
 
+<!-- NOTE: this overlaps with `lead by example`
+and also the document structure recommendations -->
+
 ### Show, Don't Tell
 
 The fastest path to understanding is a working example.
@@ -132,6 +135,8 @@ Paste code examples directly and without further alteration.
 }
 ```
 
+<!-- #NOTE also overlaps with the next section  -->
+
 ### Lead with Practical Examples
 
 Don't front-load theory. Readers want to accomplish something first, then understand why it works.
@@ -186,6 +191,8 @@ Users learn the NixOS module system by seeing patterns first.
 - Flakes
 - git
 
+<!-- #NOTE: this would go under something like document structure? -->
+
 ### Headings
 
 Use sentence case. A reader scanning only headings should understand the page.
@@ -201,6 +208,8 @@ Use sentence case. A reader scanning only headings should understand the page.
 > Set up a PostgreSQL database
 > Configure networking
 > Add a user to the system
+
+<!-- #NOTE: under writing style? -->
 
 ### Imperative Mood, Voice, and Person
 
@@ -348,6 +357,8 @@ Use descriptive link text. Never use "click here" or "this link."
 > See the `[NixOS options reference](url)` for details.
 > Read the `[NixOS module system guide](url)`.
 
+<!-- NOTE: the following sentence is quite long -->
+
 Only link when the destination is directly relevant, not for generic background context (sometimes known as "Wikipedia-style links"). Readers feel obligated to click links, fearing they'll miss something important. Don't send them to a generic article about a technology when they're looking for how *your* system uses it.
 
 **Don't:**
@@ -360,6 +371,8 @@ Only link when the destination is directly relevant, not for generic background 
 **Do:**
 
 > See `[database schema](url)` for the full table structure.
+
+<!-- NOTE: this is about *writing good procedures* -->
 
 ### UI Language
 
