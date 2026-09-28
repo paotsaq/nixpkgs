@@ -322,6 +322,16 @@ Don't bury the negative. Key limitations should be prominent, not a footnote aft
 
 > This service does not support multiple instances.
 
+### One sentence per line
+
+Put each sentence in its own line.
+
+This makes reviews and suggestions much easier, since GitHub's review system is based on lines.
+
+It also helps identifying long sentences at a glance.
+
+When changing existing content, update formatting if possible, but avoid excessive diffs.
+
 ### Consistent Terminology
 
 Pick a term and stick to it. Don't swap synonyms to avoid repetition. In technical documentation, repetition is clarity.

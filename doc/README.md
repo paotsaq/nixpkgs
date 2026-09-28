@@ -21,8 +21,6 @@ When writing new docs use **Progressive Disclosure:**
 
 Use our [style guide](./styleguide.md) for more in depth guidance on writing good documentation.
 
-Write **guides** task-first: lead with a working example, then explain in prose.
-Write **reference** as the specification of functions and attributes.
 
 We are actively working to generate reference documentation from the [doc-comments](https://github.com/NixOS/rfcs/blob/master/rfcs/0145-doc-strings.md) present in code, which also lets you view it locally with the `:doc` command in `nix repl`, e.g.:
 
@@ -200,17 +198,24 @@ Watermelon
 
 ## Documentation conventions
 
-In an effort to keep the Nixpkgs manual in a consistent style, please follow the conventions below, unless they prevent you from properly documenting something.
-In that case, please open an issue about the particular documentation convention and tag it with a "needs: documentation" label.
-When needed, each convention explains why it exists, so you can make a decision whether to follow it or not based on your particular case.
-Note that these conventions are about the **structure** of the manual (and its source files), not about the content that goes in it.
-You, as the writer of documentation, are still in charge of its content.
+To keep the Nixpkgs manual in a consistent style, follow the conventions below, unless they prevent you from properly documenting something.
 
-**For prose style, see the [documentation style guide](./styleguide.md).**
+In that case, please open an issue about the particular documentation convention and tag it with a `needs: documentation` label.
+
+### Kinds of documentation
+
+Documentation can be:
+
+* a **guide**: starts with a minimal working example towards a goal; explanation follows in prose.
+
+* a **reference** as the specification of functions and attributes.
+Reference may introduce additional examples that are unit-oriented. (minimal usage, edge-cases).
 
 ### Document structure
 
-Organize each chapter as guide sections first, then a single `## Reference` section.
+Each manual chapter starts with a guide, and then a single `## Reference` section.
+
+<!-- NOTE: would it not be better to link to an actual chapter in the documentation? -->
 
 A well-structured chapter looks like this:
 
@@ -236,7 +241,6 @@ buildFooPackage {
 :::
 
 `buildFooPackage` needs `pname` and `version`.
-Keep explanation short, and place it after the example.
 
 ## Reference {#foo-reference}
 
@@ -256,63 +260,21 @@ See [](#ex-foo-packaging).
 
 Examples live in one place: the guide owns them and the reference links to them.
 
-Guides introduce minimal working examples that are goal-oriented (typical usage).
-
-Reference may introduce additional examples that are unit-oriented. (minimal usage, edge-cases).
-If the guide example is already sufficient, just link to it from the reference.
-
 Follow this structure strictly; to deviate, ping @NixOS/documentation-team.
 
 
-### One sentence per line
-
-Put each sentence in its own line.
-This makes reviews and suggestions much easier, since GitHub's review system is based on lines.
-It also helps identifying long sentences at a glance.
-
-Not everything has been migrated to this format yet.
-Please always use it for new content.
-When changing existing content, update formatting if possible, but avoid excessive diffs.
-
-### Examples first
-
-Put examples before detailed explanations (see the [style guide](./styleguide.md) for the rationale).
-
-Use this structure for each documented item:
-
-1. Title
-2. Abstract (optional, one sentence max)
-3. Example
-4. Explanation (details, edge cases, types, defaults)
-
-Rendered example:
-
-````markdown
-## `lib.toUpper`
-
-Converts all characters in a string to uppercase.
-
-:::{.example #ex-lib-toUpper}
-# Converting a string to uppercase
-```nix
-lib.toUpper "hello"
-=> "HELLO"
-```
-
-:::
-
-Only acts on ASCII characters.
-Unicode characters are passed through unchanged.
-````
+<!-- NOTE: this is another set of guidelines -->
 
 ### Writing Function Documentation
 
 Function documentation is *reference documentation*, for which
 [diataxis Reference documentation](https://diataxis.fr/reference/) (8 minutes) is **mandatory reading**.
 
-On top of the diataxis framework, which provides a balanced perspective on what reference documentation should contain, we apply a specific style rule to function documentation:
-the first sentence is in present tense, active voice, and the subject is omitted, referring implicitly to the name of the function.
-For example:
+On top of the diataxis framework, function documentation must have:
+
+* the first sentence is in present tense;
+* active voice;
+* subject omitted, referring implicitly to the name of the function.
 
 ```nix
 /**
@@ -332,6 +294,8 @@ Subtracts value `b` from value `a`.
 
 Returns the difference as a number.
 ```
+
+<!-- TODO: what is a callout? -->
 
 ### Callouts and examples
 
@@ -388,6 +352,8 @@ nix-repl> builtins.attrNames { a = 1; b = 2; }
 [ "a" "b" ]
 ```
 Note how the input is preceded by `nix-repl>` and the output is provided as you'd see on the Nix REPL.
+
+<!-- TODO: document structure  -->
 
 ### Headings for inputs, outputs and examples
 
