@@ -264,7 +264,11 @@ You, as the writer of documentation, are still in charge of its content.
 
 ### Document structure
 
+<!-- NOTE: it is not clear what a `guide section` is -->
+
 Organize each chapter as guide sections first, then a single `## Reference` section.
+
+<!-- NOTE: would it not be better to link to an actual chapter in the documentation? -->
 
 A well-structured chapter looks like this:
 
@@ -290,6 +294,8 @@ buildFooPackage {
 :::
 
 `buildFooPackage` needs `pname` and `version`.
+
+<!-- TODO: this line is wrong here -->
 Keep explanation short, and place it after the example.
 
 ## Reference {#foo-reference}
@@ -317,6 +323,7 @@ If the guide example is already sufficient, just link to it from the reference.
 
 Follow this structure strictly; to deviate, ping @NixOS/documentation-team.
 
+<!-- NOTE: this is styleguide material -->
 
 ### One sentence per line
 
@@ -327,6 +334,8 @@ It also helps identifying long sentences at a glance.
 Not everything has been migrated to this format yet.
 Please always use it for new content.
 When changing existing content, update formatting if possible, but avoid excessive diffs.
+
+<!-- TODO: this is redundant -->
 
 ### Examples first
 
@@ -359,6 +368,8 @@ Only acts on ASCII characters.
 Unicode characters are passed through unchanged.
 ````
 
+<!-- NOTE: this is another set of guidelines -->
+
 ### Writing Function Documentation
 
 Function documentation is *reference documentation*, for which
@@ -386,6 +397,8 @@ Subtracts value `b` from value `a`.
 
 Returns the difference as a number.
 ```
+
+<!-- TODO: what is a callout? -->
 
 ### Callouts and examples
 
@@ -442,6 +455,8 @@ nix-repl> builtins.attrNames { a = 1; b = 2; }
 [ "a" "b" ]
 ```
 Note how the input is preceded by `nix-repl>` and the output is provided as you'd see on the Nix REPL.
+
+<!-- TODO: document structure  -->
 
 ### Headings for inputs, outputs and examples
 
