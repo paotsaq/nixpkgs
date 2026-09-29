@@ -2,9 +2,7 @@
 
 Use this page as a reference and style guide for our internal and external documentation.
 
-## Assumptions about the reader
-
-**Assume competence, not familiarity.**
+### Assume competence, not familiarity.**
 
 Write for someone who knows a great deal — up to but not including this project.
 
@@ -300,7 +298,11 @@ Every word must earn its place.
 
 ### Writing Procedures
 
-One instruction per sentence. Don't pack multiple actions into one sentence.
+One instruction per sentence.
+
+Don't pack multiple actions into one sentence.
+
+One sentence per line too.
 
 **Don't:**
 
@@ -322,15 +324,6 @@ Don't bury the negative. Key limitations should be prominent, not a footnote aft
 
 > This service does not support multiple instances.
 
-### One sentence per line
-
-Put each sentence in its own line.
-
-This makes reviews and suggestions much easier, since GitHub's review system is based on lines.
-
-It also helps identifying long sentences at a glance.
-
-When changing existing content, update formatting if possible, but avoid excessive diffs.
 
 ### Consistent Terminology
 

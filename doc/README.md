@@ -64,6 +64,28 @@ Once you have a successful build, you can open the aforementioned path in a brow
 
 To test redirects, perform a browser refresh, as browsers do not re-run client JS code when only the anchor has changed.
 
+## Commit conventions
+
+- Make sure you read about the [commit conventions](../CONTRIBUTING.md#commit-conventions) common to Nixpkgs as a whole.
+
+- If creating a commit purely for documentation changes, format the commit message in the following way:
+
+  ```
+  doc/component: (documentation summary)
+
+  (Motivation for change, relevant links, additional information.)
+  ```
+
+  Examples:
+
+  * doc/stdenv: update the kernel config documentation to use `nix-shell`
+  * doc/getting-started: add information about `nix-update-script`
+
+    Closes #216321.
+
+- If the commit contains more than just documentation changes, follow the commit message format relevant for the rest of the changes.
+
+
 ## Syntax
 
 As per [RFC 0072](https://github.com/NixOS/rfcs/pull/72), all new documentation content should be written in [CommonMark](https://commonmark.org/) Markdown dialect.
@@ -175,26 +197,79 @@ Watermelon
 :   Green fruit with red flesh
 ```
 
-## Commit conventions
+#### Examples
 
-- Make sure you read about the [commit conventions](../CONTRIBUTING.md#commit-conventions) common to Nixpkgs as a whole.
+To define a referenceable example use the following fencing:
 
-- If creating a commit purely for documentation changes, format the commit message in the following way:
+```markdown
+:::{.example #an-attribute-set-example}
+# An attribute set example
 
-  ```
-  doc/component: (documentation summary)
+Some text before the example.
 
-  (Motivation for change, relevant links, additional information.)
-  ```
+    ```nix
+    { a = 1; b = 2;}
+    ```
 
-  Examples:
+Some text after the example.
+:::
+```
 
-  * doc/stdenv: update the kernel config documentation to use `nix-shell`
-  * doc/getting-started: add information about `nix-update-script`
+Defining examples through the `example` fencing class adds them to a "List of Examples" section after the Table of Contents.
+Though this is not shown in the rendered documentation on nixos.org.
 
-    Closes #216321.
+#### Figures
 
-- If the commit contains more than just documentation changes, follow the commit message format relevant for the rest of the changes.
+To define a referenceable figure use the following fencing:
+
+```markdown
+::: {.figure #nixos-logo}
+# NixOS Logo
+![NixOS logo](./nixos_logo.png)
+:::
+```
+
+Defining figures through the `figure` fencing class adds them to a `List of Figures` after the `Table of Contents`.
+Though this is not shown in the rendered documentation on nixos.org.
+
+#### Footnotes
+
+To add a footnote explanation, use the following syntax:
+
+```markdown
+Sometimes it's better to add context [^context] in a footnote.
+
+[^context]: This explanation will be rendered at the end of the chapter.
+```
+
+#### Inline comments
+
+Inline comments are supported with following syntax:
+
+```markdown
+<!-- This is an inline comment -->
+```
+
+The comments will not be rendered in the rendered HTML.
+
+#### Link reference definitions
+
+Links can reference a label, for example, to make the link target reusable:
+
+```markdown
+::: {.note}
+Reference links can also be used to [shorten URLs][url-id] and keep the markdown readable.
+:::
+
+[url-id]: https://github.com/NixOS/nixpkgs/blob/19d4f7dc485f74109bd66ef74231285ff797a823/doc/README.md
+```
+
+This syntax is taken from [CommonMark](https://spec.commonmark.org/0.30/#link-reference-definitions).
+
+#### Typographic replacements
+
+Typographic replacements are enabled.
+Check the [list of possible replacement patterns](https://github.com/executablebooks/markdown-it-py/blob/3613e8016ecafe21709471ee0032a90a4157c2d1/markdown_it/rules_core/replacements.py#L1-L15).
 
 ## Documentation conventions
 
@@ -208,12 +283,11 @@ Documentation can be:
 
 * a **guide**: starts with a minimal working example towards a goal; explanation follows in prose.
 
-* a **reference** as the specification of functions and attributes.
-Reference may introduce additional examples that are unit-oriented. (minimal usage, edge-cases).
+* a **reference** as the specification of functions and attributes; may include unit-oriented examples (eg. edge-cases).
 
 ### Document structure
 
-Each manual chapter starts with a guide, and then a single `## Reference` section.
+Each manual chapter starts with a guide, and is followed by a single `## Reference` section.
 
 <!-- NOTE: would it not be better to link to an actual chapter in the documentation? -->
 
@@ -262,10 +336,45 @@ Examples live in one place: the guide owns them and the reference links to them.
 
 Follow this structure strictly; to deviate, ping @NixOS/documentation-team.
 
+### Headings for inputs, outputs and examples
 
-<!-- NOTE: this is another set of guidelines -->
+When documenting functions or anything that has inputs/outputs and example usage, use nested headings to separate inputs, outputs, and examples.
 
-### Writing Function Documentation
+Keep examples as the last nested heading, and link to the examples wherever applicable in the documentation.
+
+The purpose of this convention is to provide a familiar structure for navigating the manual, so any reader can expect to find content related to inputs in an "inputs" heading, examples in an "examples" heading, and so on.
+
+An example:
+
+```
+## buildImage
+
+Some explanation about the function here.
+Describe a particular scenario, and point to [](#ex-dockerTools-buildImage), which is an example demonstrating it.
+
+### Inputs
+
+Documentation for the inputs of `buildImage`.
+Perhaps even point to [](#ex-dockerTools-buildImage) again when talking about something specifically linked to it.
+
+### Passthru outputs
+
+Documentation for any passthru outputs of `buildImage`.
+
+### Examples
+
+Note that this is the last nested heading in the `buildImage` section.
+
+:::{.example #ex-dockerTools-buildImage}
+
+# Using `buildImage`
+
+Example of how to use `buildImage` goes here.
+
+:::
+```
+
+### Function Documentation
 
 Function documentation is *reference documentation*, for which
 [diataxis Reference documentation](https://diataxis.fr/reference/) (8 minutes) is **mandatory reading**.
@@ -355,41 +464,6 @@ Note how the input is preceded by `nix-repl>` and the output is provided as you'
 
 <!-- TODO: document structure  -->
 
-### Headings for inputs, outputs and examples
-
-When documenting functions or anything that has inputs/outputs and example usage, use nested headings to clearly separate inputs, outputs, and examples.
-Keep examples as the last nested heading, and link to the examples wherever applicable in the documentation.
-
-The purpose of this convention is to provide a familiar structure for navigating the manual, so any reader can expect to find content related to inputs in an "inputs" heading, examples in an "examples" heading, and so on.
-An example:
-```
-## buildImage
-
-Some explanation about the function here.
-Describe a particular scenario, and point to [](#ex-dockerTools-buildImage), which is an example demonstrating it.
-
-### Inputs
-
-Documentation for the inputs of `buildImage`.
-Perhaps even point to [](#ex-dockerTools-buildImage) again when talking about something specifically linked to it.
-
-### Passthru outputs
-
-Documentation for any passthru outputs of `buildImage`.
-
-### Examples
-
-Note that this is the last nested heading in the `buildImage` section.
-
-:::{.example #ex-dockerTools-buildImage}
-
-# Using `buildImage`
-
-Example of how to use `buildImage` goes here.
-
-:::
-```
-
 ### Function arguments
 
 Use [definition lists](#definition-lists) to document function arguments, and the attributes of such arguments as well as their [types](https://nixos.org/manual/nix/stable/language/values).
@@ -435,79 +509,6 @@ Checklist:
 - Nix types aren't in code spans, because they are not code
 - Nix types are capitalized, to distinguish them from the camelCase Module System types, which _are_ code and behave like functions.
 
-#### Examples
-
-To define a referenceable figure use the following fencing:
-
-```markdown
-:::{.example #an-attribute-set-example}
-# An attribute set example
-
-You can add text before
-
-    ```nix
-    { a = 1; b = 2;}
-    ```
-
-and after code fencing
-:::
-```
-
-Defining examples through the `example` fencing class adds them to a "List of Examples" section after the Table of Contents.
-Though this is not shown in the rendered documentation on nixos.org.
-
-#### Figures
-
-To define a referenceable figure use the following fencing:
-
-```markdown
-::: {.figure #nixos-logo}
-# NixOS Logo
-![NixOS logo](./nixos_logo.png)
-:::
-```
-
-Defining figures through the `figure` fencing class adds them to a `List of Figures` after the `Table of Contents`.
-Though this is not shown in the rendered documentation on nixos.org.
-
-#### Footnotes
-
-To add a footnote explanation, use the following syntax:
-
-```markdown
-Sometimes it's better to add context [^context] in a footnote.
-
-[^context]: This explanation will be rendered at the end of the chapter.
-```
-
-#### Inline comments
-
-Inline comments are supported with following syntax:
-
-```markdown
-<!-- This is an inline comment -->
-```
-
-The comments will not be rendered in the rendered HTML.
-
-#### Link reference definitions
-
-Links can reference a label, for example, to make the link target reusable:
-
-```markdown
-::: {.note}
-Reference links can also be used to [shorten URLs][url-id] and keep the markdown readable.
-:::
-
-[url-id]: https://github.com/NixOS/nixpkgs/blob/19d4f7dc485f74109bd66ef74231285ff797a823/doc/README.md
-```
-
-This syntax is taken from [CommonMark](https://spec.commonmark.org/0.30/#link-reference-definitions).
-
-#### Typographic replacements
-
-Typographic replacements are enabled.
-Check the [list of possible replacement patterns](https://github.com/executablebooks/markdown-it-py/blob/3613e8016ecafe21709471ee0032a90a4157c2d1/markdown_it/rules_core/replacements.py#L1-L15).
 
 ## Getting help
 
