@@ -35,9 +35,7 @@ See [Document structure](#document-structure) for a structural template.
 
 ## Building and navigating documentation locally
 
-The Nixpkgs manual is rendered by [nixos-render-docs](../pkgs/by-name/ni/nixos-render-docs/) (sometimes abbreviated `nrd`).
-
-Its index is [`nav.json`](./nav.json).
+The Nixpkgs manual is rendered by [nixos-render-docs](../pkgs/by-name/ni/nixos-render-docs/) (sometimes abbreviated `nrd`), and its index is [`nav.json`](./nav.json).
 
 ### Development environment
 
