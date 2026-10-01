@@ -22,18 +22,6 @@ Write for someone who knows a great deal — up to but not including this projec
 
 If specific knowledge is required, mention it at the start of the page.
 
-### Show, don't tell
-
-The fastest path to understanding is a working example.
-People learn by doing, not by reading about doing.
-
-**Recommended structure:**
-
-- Start with the minimal working code or command
-- Briefly explain what it does
-- Cover edge cases or variations
-- Link to further information instead of including it
-
 ### Grammar and style
 
 **Sentence structure:**
