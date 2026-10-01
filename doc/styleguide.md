@@ -2,9 +2,7 @@
 
 Use this page as a reference and style guide for our internal and external documentation.
 
-## Assumptions about the reader
-
-**Assume competence, not familiarity.**
+### Assumptions about the reader
 
 Write for someone who knows a great deal — up to but not including this project.
 
@@ -21,26 +19,6 @@ Write for someone who knows a great deal — up to but not including this projec
 - NixOS workflows
 
 If specific knowledge is required, mention it at the start of the page.
-
-### Grammar and style
-
-**Sentence structure:**
-
-- Use simple, direct sentences
-- Break complex ideas into multiple short sentences
-- Avoid nested clauses
-
-**Bad:**
-
-> The following command, which utilizes nixos-generate-config to produce a comprehensive hardware configuration, will write the results back into the respective configuration directory located on your local machine.
-
-What the user does is hidden in the middle.
-`nixos-generate-config` is a leaked implementation detail.
-Users care about *detecting hardware*, not *the tool that does it*.
-
-**Good:**
-
-> This command detects your hardware and saves the configuration.
 
 ### Content organization
 
@@ -64,28 +42,10 @@ Add a webserver configuration to your NixOS setup:
 
 Use **progressive disclosure**. Introduce concepts only when needed.
 
-**Recommended structure:**
-
 1. State the goal (one sentence)
 2. Show the simplest working example
 3. Explain concepts if needed
 4. Provide advanced options separately or link to the reference
-
-### No meta-commentary
-
-Don't describe what the documentation does. Just do it.
-
-**Don't:**
-
-> This section explains how to configure networking.
-
-> The following guide walks you through setting up a web server.
-
-**Do:**
-
-> Configure networking by setting:
-
-> Set up a web server:
 
 ### Code examples
 
@@ -120,6 +80,23 @@ Paste code examples directly and without further alteration.
 }
 ```
 
+### No meta-commentary
+
+Don't describe what the documentation does. Just do it.
+
+**Don't:**
+
+> This section explains how to configure networking.
+
+> The following guide walks you through setting up a web server.
+
+**Do:**
+
+> Configure networking by setting:
+
+> Set up a web server:
+
+
 ### Lead with practical examples
 
 Don't front-load theory. Readers want to accomplish something first, then understand why it works.
@@ -147,7 +124,6 @@ sudo nixos-rebuild switch
 ```
 
 ### Teach Nix through examples, not theory
-
 
 Users learn the NixOS module system by seeing patterns first.
 
@@ -189,6 +165,50 @@ Use sentence case. A reader scanning only headings should understand the page.
 > Set up a PostgreSQL database
 > Configure networking
 > Add a user to the system
+
+## Grammar and Style
+
+### One instruction per sentence
+
+Break a complex action into steps. Don't pack multiple actions into one sentence.
+
+**Don't:**
+
+> Navigate to your project directory and run the command, then check the output.
+
+**Do:**
+
+1. Navigate to your project directory.
+2. Run the command.
+3. Check the output.
+
+### Negatives upfront
+
+Key limitations should be prominent, not a footnote after a positive description.
+
+**Don't:**
+
+> This service supports multiple roles, integrates with existing modules, and works great for most setups (note that multiple instances are not supported).
+
+**Do:**
+
+> This service does not support multiple instances.
+
+
+### Avoid nested clauses
+
+**Don't:**
+
+> The following command, which utilizes nixos-generate-config to produce a comprehensive hardware configuration, will write the results back into the respective configuration directory located on your local machine.
+
+What the user does is hidden in the middle.
+`nixos-generate-config` is a leaked implementation detail.
+Users care about *detecting hardware*, not *the tool that does it*.
+
+**Do:**
+
+> This command detects your hardware and saves the configuration.
+
 
 ### Imperative mood, voice, and person
 
@@ -286,30 +306,6 @@ Delete on sight:
 
 Every word must earn its place.
 
-### Writing procedures
-
-One instruction per sentence. Don't pack multiple actions into one sentence.
-
-**Don't:**
-
-> Navigate to your project directory and run the command, then check the output.
-
-**Do:**
-
-1. Navigate to your project directory.
-2. Run the command.
-3. Check the output.
-
-Don't bury the negative. Key limitations should be prominent, not a footnote after a positive description.
-
-**Don't:**
-
-> This service supports multiple roles, integrates with existing modules, and works great for most setups (note that multiple instances are not supported).
-
-**Do:**
-
-> This service does not support multiple instances.
-
 ### Consistent terminology
 
 Pick a term and stick to it. Don't swap synonyms to avoid repetition. In technical documentation, repetition is clarity.
@@ -348,6 +344,8 @@ Only link when the destination is directly relevant, not for generic background 
 **Do:**
 
 > See `[database schema](url)` for the full table structure.
+
+<!-- this is more about documentation discipline! -->
 
 ### UI language
 
