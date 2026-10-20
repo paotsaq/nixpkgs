@@ -52,35 +52,6 @@ Users care about *detecting hardware*, not *the tool that does it*.
 
 > This command detects your hardware and saves the configuration.
 
-### Content organization
-
-Lead with value. State what the reader will accomplish before explaining how.
-
-**Bad:**
-
-> To create a new NixOS configuration that you can later use as a webserver, first navigate to your project directory, then add a new host configuration file with the desired machine name.
-
-**Good:**
-
-Add a webserver configuration to your NixOS setup:
-
-```nix
-# hosts/webserver/configuration.nix
-{ ... }:
-{
-  services.nginx.enable = true;
-}
-```
-
-Use **progressive disclosure**. Introduce concepts only when needed.
-
-**Recommended structure:**
-
-1. State the goal (one sentence)
-2. Show the simplest working example
-3. Explain concepts if needed
-4. Provide advanced options separately or link to the reference
-
 ### No meta-commentary
 
 Don't describe what the documentation does. Just do it.
@@ -129,42 +100,6 @@ Paste code examples directly and without further alteration.
   services.openssh.enable = true;
 }
 ```
-
-### Lead with practical examples
-
-Don't front-load theory. Readers want to accomplish something first, then understand why it works.
-
-- Show configuration as *what you want*, not *how the module system works*
-- Introduce Nix-specific concepts only when they are needed to complete the task
-- Defer language mechanics to reference pages or `nix.dev`
-
-**Bad:**
-
-> Before adding a service, you need to understand the NixOS module system and attribute set merging.
-
-**Good:**
-
-Enable nginx:
-
-```nix
-{ services.nginx.enable = true; }
-```
-
-This adds nginx to your system configuration. Rebuild to apply:
-
-```bash
-sudo nixos-rebuild switch
-```
-
-### Teach Nix through examples, not theory
-
-
-Users learn the NixOS module system by seeing patterns first.
-
-- Start with a working example
-- Explanation follows the code
-- Link deeper concepts instead of inlining them
-- Link to `nix.dev` for optional learning
 
 ### General rules
 
