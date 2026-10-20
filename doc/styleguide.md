@@ -2,9 +2,7 @@
 
 Use this page as a reference and style guide for our internal and external documentation.
 
-## Assumptions about the reader
-
-**Assume competence, not familiarity.**
+### Assume competence, not familiarity
 
 Write for someone who knows a great deal — up to but not including this project.
 
