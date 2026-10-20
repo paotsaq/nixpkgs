@@ -2,6 +2,8 @@
 
 Use this page as a reference and style guide for our internal and external documentation.
 
+## Technical writing
+
 ### Assume competence, not familiarity
 
 Write for someone who knows a great deal — up to but not including this project.
@@ -32,13 +34,217 @@ People learn by doing, not by reading about doing.
 - Cover edge cases or variations
 - Link to further information instead of including it
 
-### Grammar and style
+### Keep examples focused
 
-**Sentence structure:**
+Show one concept at a time.
+Use realistic but simple scenarios.
+Avoid dependencies on other examples
 
-- Use simple, direct sentences
-- Break complex ideas into multiple short sentences
-- Avoid nested clauses
+### Use minimal comments
+
+Let the code speak for itself.
+Paste code examples directly and without further alteration.
+
+**Bad:**
+
+```nix
+# This sets the hostname for the machine
+{
+  networking.hostName = "webserver"; # Change this to your machine's hostname
+  # This enables SSH access
+  services.openssh.enable = true; # Required for remote deployment
+}
+```
+
+**Good:**
+
+```nix
+{
+  networking.hostName = "webserver";
+  services.openssh.enable = true;
+}
+```
+
+### Consistent terminology
+
+Pick a term and stick to it. Don't swap synonyms to avoid repetition. In technical documentation, repetition is clarity.
+
+**Don't:**
+
+> Create a machine... configure the host... deploy the node.
+
+**Do:**
+
+> Create a machine... configure the machine... deploy the machine.
+
+### Clean system discipline
+
+When writing or updating documentation:
+
+**Don't:**
+
+> Write steps from memory on your development machine, assuming what works there will work everywhere.
+
+**Do:**
+
+> - Start on a clean system — a fresh VM or new user account
+> - Take notes in real time as you work through the steps
+> - Document every warning, prompt, or unexpected output the system shows
+
+Also think in combinations: WSL vs native Linux, with and without existing keys.
+You don't need to test every matrix square — but you need to know which ones diverge.
+
+### Never type code — always copy-paste
+
+Always copy commands and code from a terminal where you just ran them successfully.
+Never retype from memory.
+
+**Don't:**
+
+> Retype a command from memory into the documentation.
+>
+> Retype code into a code-block from memory
+
+**Do:**
+
+> Paste commands directly from the shell or IDE.
+>
+> Paste code that has been successfully validated with nix-instantiate or nix-build
+
+### UI language
+
+Match UI element names exactly: wording, casing, and spacing (even if a label seems oddly worded).
+
+**Don't:**
+
+> Click the generator button.
+>
+> Select the save option.
+
+**Do:**
+
+> Click **Generate a Key**.
+>
+> Click **Save Changes**.
+
+## Grammar and style
+
+### General rules
+
+- Abbreviate keys like `ssh-ed25519 AAAAC3NzaC…`
+- Abbreviate IP addresses like `192.168.XXX.XXX`
+- Variables are capitalized and start with `$`, e.g. `$YOUR_HOSTNAME`
+- Variables should be directly usable during copy-paste
+- Do **not** describe missing code parts (`#elided`, `#omitted`)
+- **Machine vs Host**: use "machine" for the NixOS system identity, "host" for the physical or virtual hardware
+- Replace sensitive values with placeholders: `<YOUR-KEY>`, `<YOUR-HOST>`, `<YOUR-TOKEN>`.
+- Use sentence case.
+
+### Capitalization
+
+- GB / RAM / HDD
+- bootable USB drive
+- Wi-Fi / DHCP / DNS
+- macOS / NixOS / Nix / Linux
+- Flakes
+- git
+
+### Plain words
+
+Technical precision for technical terms; plain language for everything else.
+
+- "use" not "utilize"
+- "start" not "initiate"
+- "end" not "terminate"
+- "help" not "facilitate"
+- "send" not "transmit"
+- "set up" not "establish"
+- "find out" not "ascertain"
+
+### Filler words and weak phrases
+
+Cut words and phrases that add length without meaning.
+
+**Don't:**
+
+> Simply run `nixos-rebuild switch`.
+>
+> In order to deploy, you first need to run the command, which allows you to push the config.
+>
+> It's worth noting that this requires root access.
+
+**Do:**
+
+> Run `nixos-rebuild switch`.
+>
+> To deploy, run:
+>
+> This requires root access.
+
+Delete on sight:
+
+- "simply", "just", "easily", "basically", "obviously"
+- "in order to" → use "to"
+- "allows you to" → use the verb directly
+- "it's worth noting that" → just say the thing
+- no exclamation marks in technical prose
+
+Every word must earn its place.
+
+### One sentence per line
+
+Put each sentence in its own line.
+
+**Don't:**
+
+```
+Write short sentences. One per unit of thought.
+```
+
+**Do:**
+
+```
+Write short sentences.
+One per unit of thought.
+```
+
+This is [semantic line break](https://sembr.org/).
+It makes reviews and suggestions much easier, since GitHub's review system is based on lines.
+
+A single line break on source markdown renders output in the same line.
+Two consecutive line breaks will render a line break in the output.
+
+### Writing procedures
+
+One instruction per sentence. Don't pack multiple actions into one sentence.
+
+**Don't:**
+
+> Navigate to your project directory and run the command, then check the output.
+
+**Do:**
+
+1. Navigate to your project directory.
+2. Run the command.
+3. Check the output.
+
+### Don't bury the negative.
+
+Key limitations should be prominent, not a footnote after a positive description.
+
+**Don't:**
+
+> This service supports multiple roles, integrates with existing modules, and works great for most setups (note that multiple instances are not supported).
+
+**Do:**
+
+> This service does not support multiple instances.
+
+### Sentence structure
+
+Use simple and direct sentences.
+Break complex ideas into multiple short sentences.
+Avoid nested clauses.
 
 **Bad:**
 
@@ -67,58 +273,6 @@ Don't describe what the documentation does. Just do it.
 > Configure networking by setting:
 >
 > Set up a web server:
-
-### Code examples
-
-**Keep examples focused:**
-
-- Show one concept at a time
-- Use realistic but simple scenarios
-- Avoid dependencies on other examples
-
-**Minimal comments**
-
-Let the code speak for itself.
-Paste code examples directly and without further alteration.
-
-**Bad:**
-
-```nix
-# This sets the hostname for the machine
-{
-  networking.hostName = "webserver"; # Change this to your machine's hostname
-  # This enables SSH access
-  services.openssh.enable = true; # Required for remote deployment
-}
-```
-
-**Good:**
-
-```nix
-{
-  networking.hostName = "webserver";
-  services.openssh.enable = true;
-}
-```
-
-### General rules
-
-- Abbreviate keys like `ssh-ed25519 AAAAC3NzaC…`
-- Abbreviate IP addresses like `192.168.XXX.XXX`
-- Variables are capitalized and start with `$`, e.g. `$YOUR_HOSTNAME`
-- Variables should be directly usable during copy-paste
-- Do **not** describe missing code parts (`#elided`, `#omitted`)
-- **Machine vs Host**: use "machine" for the NixOS system identity, "host" for the physical or virtual hardware
-- Use sentence case.
-
-### Capitalization
-
-- GB / RAM / HDD
-- bootable USB drive
-- Wi-Fi / DHCP / DNS
-- macOS / NixOS / Nix / Linux
-- Flakes
-- git
 
 ### Use descriptive headings
 
@@ -208,107 +362,6 @@ A nominalization is a verb turned into a noun, often by adding *-tion*, *-meant*
 >
 > Explain the error.
 
-### Plain words
-
-Technical precision for technical terms; plain language for everything else.
-
-- "use" not "utilize"
-- "start" not "initiate"
-- "end" not "terminate"
-- "help" not "facilitate"
-- "send" not "transmit"
-- "set up" not "establish"
-- "find out" not "ascertain"
-
-### Filler words and weak phrases
-
-Cut words and phrases that add length without meaning.
-
-Delete on sight:
-
-- "simply", "just", "easily", "basically", "obviously"
-- "in order to" → use "to"
-- "allows you to" → use the verb directly
-- "it's worth noting that" → just say the thing
-- no exclamation marks in technical prose
-
-**Don't:**
-
-> Simply run `nixos-rebuild switch`.
->
-> In order to deploy, you first need to run the command, which allows you to push the config.
->
-> It's worth noting that this requires root access.
-
-**Do:**
-
-> Run `nixos-rebuild switch`.
->
-> To deploy, run:
->
-> This requires root access.
-
-Every word must earn its place.
-
-### One sentence per line
-
-Put each sentence in its own line.
-
-**Don't:**
-
-```
-Write short sentences. One per unit of thought.
-```
-
-**Do:**
-
-```
-Write short sentences.
-One per unit of thought.
-```
-
-This is [semantic line break](https://sembr.org/).
-It makes reviews and suggestions much easier, since GitHub's review system is based on lines.
-
-A single line break on source markdown renders output in the same line.
-Two consecutive line breaks will render a line break in the output.
-
-### Writing procedures
-
-One instruction per sentence. Don't pack multiple actions into one sentence.
-
-**Don't:**
-
-> Navigate to your project directory and run the command, then check the output.
-
-**Do:**
-
-1. Navigate to your project directory.
-2. Run the command.
-3. Check the output.
-
-Don't bury the negative. Key limitations should be prominent, not a footnote after a positive description.
-
-**Don't:**
-
-> This service supports multiple roles, integrates with existing modules, and works great for most setups (note that multiple instances are not supported).
-
-**Do:**
-
-> This service does not support multiple instances.
-
-### Consistent terminology
-
-Pick a term and stick to it. Don't swap synonyms to avoid repetition. In technical documentation, repetition is clarity.
-
-**Don't:**
-
-> Create a machine... configure the host... deploy the node.
-
-**Do:**
-
-> Create a machine... configure the machine... deploy the machine.
-
 ### Links
 
 Use descriptive link text. Never use "click here" or "this link."
@@ -338,62 +391,3 @@ Only link when the destination is directly relevant, not for generic background 
 
 > See `[database schema](url)` for the full table structure.
 
-### UI language
-
-Match UI element names exactly: wording, casing, and spacing (even if a label seems oddly worded).
-
-**Don't:**
-
-> Click the generator button.
->
-> Select the save option.
-
-**Do:**
-
-> Click **Generate a Key**.
->
-> Click **Save Changes**.
-
-Someone will go looking for a button labeled "generator." They will not find it. They will be frustrated.
-
-Consistency between documentation and interface builds confidence. Words are part of the interface.
-
-:::{.tip}
-This can be tricky as UI changes; we don't yet have a policy in place for how to handle this. We welcome comments and suggestions.
-:::
-
-### Clean system discipline
-
-Your machine has things new users don't: cached credentials, installed tools, environment variables, existing configuration. When writing or updating documentation:
-
-**Don't:**
-
-> Write steps from memory on your development machine, assuming what works there will work everywhere.
-
-**Do:**
-
-> - Start on a clean system — a fresh VM or new user account
-> - Take notes in real time as you work through the steps
-> - Document every warning, prompt, or unexpected output the system shows
-
-Also think in combinations: WSL vs native Linux, with and without existing keys. You don't need to test every matrix square — but you need to know which ones diverge.
-
-### Never type code — always copy-paste
-
-Always copy commands and code from a terminal where you just ran them successfully. Never retype from memory.
-
-**Don't:**
-
-> Retype a command from memory into the documentation.
->
-> Retype code into a code-block from memory
-
-**Do:**
-
-> Paste commands directly from the shell or IDE.
->
-> Paste code that has been successfully validated with nix-instantiate or nix-build
-
-Replace sensitive values with placeholders: `<YOUR-KEY>`, `<YOUR-HOST>`, `<YOUR-TOKEN>`.
-
-Typed-from-memory commands introduce subtle errors. Even the most experienced software developers have occasional typos.
