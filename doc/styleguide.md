@@ -109,6 +109,7 @@ Paste code examples directly and without further alteration.
 - Variables should be directly usable during copy-paste
 - Do **not** describe missing code parts (`#elided`, `#omitted`)
 - **Machine vs Host**: use "machine" for the NixOS system identity, "host" for the physical or virtual hardware
+- Use sentence case.
 
 ### Capitalization
 
@@ -119,9 +120,9 @@ Paste code examples directly and without further alteration.
 - Flakes
 - git
 
-### Headings
+### Use descriptive headings
 
-Use sentence case. A reader scanning only headings should understand the page.
+A reader scanning only headings should understand the page.
 
 **Don't:**
 
